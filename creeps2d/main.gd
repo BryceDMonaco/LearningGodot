@@ -1,6 +1,7 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var difficulty_multiplier = 1.25
 var score
 
 # Called when the node enters the scene tree for the first time.
@@ -52,6 +53,8 @@ func _on_mob_timer_timeout() -> void:
 	
 	# Choose a random velocity for the mob and set it
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	# Slowly increase new mob speeds as the score rises
+	velocity *= (1 + (score / 100)) * difficulty_multiplier
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	# Actually spawn the mob
