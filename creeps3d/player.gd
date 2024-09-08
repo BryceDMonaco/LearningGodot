@@ -9,7 +9,6 @@ extends CharacterBody3D
 var target_velocity : Vector3 = Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
-	print("_physics_process")
 	var direction : Vector3 = Vector3.ZERO
 	
 	# Check for inputs and apply to the direction
