@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmthlmptagbpq"]
+[gd_scene load_steps=6 format=3 uid="uid://dmthlmptagbpq"]
 
 [ext_resource type="PackedScene" uid="uid://c2vq2r7rvy65c" path="res://art/mob.glb" id="1_qmtbu"]
 [ext_resource type="Script" path="res://mob.gd" id="1_u2r5b"]
@@ -6,7 +6,42 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6ris"]
 size = Vector3(1.5, 1, 1.8)
 
+[sub_resource type="Animation" id="Animation_04kqi"]
+resource_name = "float"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.42, 2.07, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.65, 0), Vector3(0, 0.35, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5, 1.2),
+"transitions": PackedFloat32Array(0.42, 0.44, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.139626, 0, 0), Vector3(-0.15708, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_87wt7"]
+_data = {
+"float": SubResource("Animation_04kqi")
+}
+
 [node name="Mob" type="CharacterBody3D" groups=["mob"]]
+transform = Transform3D(1, 0, 0, 0, 0.987688, 0.156434, 0, -0.156434, 0.987688, 0, 0.35, 0)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_u2r5b")
@@ -20,5 +55,10 @@ shape = SubResource("BoxShape3D_d6ris")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 aabb = AABB(-1.5, -1, -2, 3, 2, 4)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_87wt7")
+}
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
