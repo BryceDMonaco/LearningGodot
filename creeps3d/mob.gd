@@ -7,6 +7,9 @@ signal squashed
 @export var max_speed : int = 18
 
 func initialize(start_position : Vector3, player_position : Vector3) -> void:
+	# Ignore the player's vertical position, otherwise mob will point up or down
+	player_position.y = start_position.y
+	
 	# Place mob at start_position and rotate it to look at player
 	look_at_from_position(start_position, player_position, Vector3.UP)
 	
