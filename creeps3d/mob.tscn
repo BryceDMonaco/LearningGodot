@@ -6,14 +6,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6ris"]
 size = Vector3(1.5, 1, 1.8)
 
-[sub_resource type="Animation" id="Animation_04kqi"]
+[sub_resource type="Animation" id="Animation_f4wwg"]
 resource_name = "float"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath("Pivot/Character:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
+tracks/1/path = NodePath("Pivot/Character:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,7 +37,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_87wt7"]
 _data = {
-"float": SubResource("Animation_04kqi")
+"float": SubResource("Animation_f4wwg")
 }
 
 [node name="Mob" type="CharacterBody3D" groups=["mob"]]
@@ -49,6 +49,7 @@ script = ExtResource("1_u2r5b")
 [node name="Pivot" type="Node3D" parent="."]
 
 [node name="Character" parent="Pivot" instance=ExtResource("1_qmtbu")]
+transform = Transform3D(1, 0, 0, 0, 0.987688, 0.156434, 0, -0.156434, 0.987688, 0, 0.35, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_d6ris")
@@ -60,5 +61,6 @@ aabb = AABB(-1.5, -1, -2, 3, 2, 4)
 libraries = {
 "": SubResource("AnimationLibrary_87wt7")
 }
+autoplay = "float"
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
